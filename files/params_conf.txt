@@ -1,0 +1,5 @@
+input_size=700
+hidden_size=525
+output_size=2
+learn_rate=0.25
+momentum_rate=0.2
