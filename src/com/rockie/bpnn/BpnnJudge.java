@@ -15,8 +15,6 @@ import java.util.List;
 
 public class BpnnJudge {
 
-    private static final int TRAIN_TIMES = 200;
-
     private static final String FILE_DIR = "files/";
     private static final String DICTION_FILE_NAME = "dicdata";
     private static final String SAMPLE_SMS_FILE_NAME = "sample_sms.txt";
@@ -26,18 +24,20 @@ public class BpnnJudge {
 
     private Bpnn mBp;
     private int mNodes;
+    private int mTrainTimes;
 
     private BpnnJudge() {
         BpnnConfig config = BpnnConfig.getInstance(FILE_DIR + PARAMS_CONF);
 
         mNodes = config.getIntValue(BpnnConfigKeys.INPUT_SIZE);
+        mTrainTimes = config.getIntValue(BpnnConfigKeys.TRAIN_TIMES);
         int hiddenSize = config.getIntValue(BpnnConfigKeys.HIDDEN_SIZE);
         int outputSize = config.getIntValue(BpnnConfigKeys.OUTPUT_SIZE);
         double learnRate = config.getDoubleValue(BpnnConfigKeys.LEARN_RATE);
         double momentumRate = config.getDoubleValue(BpnnConfigKeys.MOMENTUM_RATE);
 
-        System.out.println("train parameters: inputSize = " + mNodes + ", hiddenSize = " + hiddenSize
-                + ", outputSize = " + outputSize + ", learnRate = " + learnRate
+        System.out.println("train parameters: inputSize = " + mNodes + ", trainTimes = " + mTrainTimes
+                + ", hiddenSize = " + hiddenSize + ", outputSize = " + outputSize + ", learnRate = " + learnRate
                 + ", momentumRate = " + momentumRate);
 
         if (mBp == null) {
@@ -60,7 +60,7 @@ public class BpnnJudge {
     }
 
     public void trainBp() {
-        for (int i = 0; i < TRAIN_TIMES; i++) {
+        for (int i = 0; i < mTrainTimes; i++) {
             trainBySampleFile(FILE_DIR + SAMPLE_SMS_FILE_NAME);
         }
 

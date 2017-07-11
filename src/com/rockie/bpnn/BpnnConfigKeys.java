@@ -7,6 +7,7 @@ public enum BpnnConfigKeys {
     OUTPUT_SIZE("output_size", 2),
     LEARN_RATE("learn_rate", 0.25),
     MOMENTUM_RATE("momentum_rate", 0.2),
+    TRAIN_TIMES("train_times", 200),
 
     /**
      * specify the last member, useless
